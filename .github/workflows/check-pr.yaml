@@ -1,21 +1,21 @@
-name: Build & Push Docker Image
+name: Build & Push MYSQL Docker Image
 
 on:
   push:
     branches:
     
-    - master
+    - main
   pull_request:
     branches:
     
-    - master
+    - main
 
 jobs:
 
   push_to_docker:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'skip ci')"
-    name: Build and Push Image to Image registry
+    name: Build and Push MYSQL Image to Image registry
     env:
       REGISTRY: docker.io
     defaults:
@@ -52,7 +52,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build and Push Docker Image
+      - name: Build and Push MYSQL Docker Image
         uses: docker/build-push-action@v2
         with:
           context: .
